@@ -10,6 +10,10 @@ of students competing against each other by answering questions in order to buil
 
 You can add your own questions. The quiz also tests students on being able to convert to/from binary / decimal and hexadecimal (although you can get them to use a converter if you've not taught them how yet!)
 
+It was designed for end of unit assessments at KS3 / KS4 but it's also been used at KS2 as a little bit of fun at some code club sessions.
+
+I've tested it with over a hundred students accessing the quiz at the same time on the same networked raspberry pi so you should be ok with an average class size. I hope it's useful!
+
 Credits
 =======
 
