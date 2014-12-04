@@ -1,0 +1,20 @@
+Algorithm
+Step by step instructions to solve a problem.
+Debug
+Find and fix mistakes in a computer program.
+Input
+Data that goes into a computer.
+Process
+Something that happens to change data into useful information.
+Output
+Information that comes out of a computer.
+Program
+A list of instructions that tells a computer exactly what to do.
+Sequence
+More than one instruction to be followed in order.
+Selection
+When your program has to make a choice.
+Repetition
+Doing the same instruction more than once.
+Variable
+Something your program needs to remember that might change.
