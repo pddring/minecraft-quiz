@@ -6,6 +6,10 @@ Minecraft Quiz on a Raspberry Pi
 These files are designed for teachers to use with a raspberry pi in the classroom as a fun way of getting a whole class (or more)
 of students competing against each other by answering questions in order to build blocks in a shared minecraft world.
 
+![Example](https://cloud.githubusercontent.com/assets/760604/5298811/1f21e84e-7bb8-11e4-95df-3c773aacc7ac.jpg)
+
+You can add your own questions. The quiz also tests students on being able to convert to/from binary / decimal and hexadecimal (although you can get them to use a converter if you've not taught them how yet!)
+
 Credits
 =======
 
