@@ -65,3 +65,15 @@ How the quiz works:
 * They have to convert the coordinates to/from binary/decimal/hexadecimal 
 * If they convert both coordinates correctly, they get a point and the block will appear in the minecraft world on the raspberry pi
 ![Converting coordinates](https://cloud.githubusercontent.com/assets/760604/5298476/4b40d754-7bb4-11e4-852c-bc9947b47eff.png)
+
+Useful cheats:
+==============
+Here are some commands that you can use to control the minecraft quiz. You can type them in at the start of the quiz at the welcome screen:
+![cheats](https://cloud.githubusercontent.com/assets/760604/5298631/318265ce-7bb6-11e4-8615-fc7802638489.png)
+`o:test` displays the whole message in minecraft in randomly chosen wood, tnt and leaves blocks
+`o:clear` clears an area in minecraft from (0, 0, 1) to (90, 80, 1) which is normally the area where text is displayed
+`o:board` displays a glass grid in minecraft showing where the text is likely to appear
+`o:test WOOD` shows the whole message in minecraft in wood
+`o:test TNT` shows the whole message in minecraft in TNT
+`o:test LEAVES` shows the whole message in minecraft in leaves
+`o:clues` shows 10 randomly chosen blocks in either wood, tnt or leaves (useful if a class can't guess the word in minecraft and they're running out of time)
