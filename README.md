@@ -13,3 +13,9 @@ The code in this project has been developed by Pete Dring from Manor CE Academy 
 
 This project works alongside Minecraft: Pi Edition which is available for free from: http://pi.minecraft.net/
 
+Instructions
+============
+
+Getting started:
+---------------
+* First, you need to have have a raspberry pi with Minecraft installed. Follow instructions on http://pi.minecraft.net/
