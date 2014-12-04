@@ -1,215 +1,46 @@
-import os
-import random
+import letters
 
+l = letters.letters
 
-def show_message(msg):
-	os.system("clear")
-	os.system("figlet " + msg)
-	
-show_message("Loading...")
-# load data from file
-f = open("questions.txt")
-data = f.read().replace("\r", "").split("\n")
-keywords = data[::2]
-definitions = data[1::2]
-NUM_QUESTIONS = len(keywords)
-f.close()
+text = raw_input("What would you like to display?")
+x_offset = int(raw_input("x coordinate:"))
+y_offset = int(raw_input("y coordinate:"))
+z_offset = int(raw_input("z coordinate:"))
+words = text.split(" ")
 
-# load message data
-f = open("message.csv")
-coords = f.read().replace("\r", "").split("\n")
-f.close()
+# discover width: length of longest word * 9
 
-# create link to minecraft
-import minecraft
-import block
-mc = minecraft.Minecraft.create()
+# discover height: number of words * 8
+height = len(words) * 8
 
-show_message("Welcome")
-print """The aim of this quiz is to help you remember and understand 
-the key words in Computing.
+complete_string = []
+for i in range(len(words)):
+    word_string = ["","","","","","","",""]
 
-Hopefully, we'll also learn a bit about how computers work and 
-have some fun with minecraft along the way too."
+    # i is word number
+    word = words[i]
 
-Press Enter to continue..."""
-while True:
-	option = raw_input()
-	if option == "o:clear":
-		mc.setBlocks(0, 0, -1, 90, 80, 1, block.AIR)
-	elif option == "o:board":
-		mc.setBlocks(0, 0, -1, 90, 80, -1, block.GLASS)
-	elif option == "o:test LEAVES":
-		try:
-			for line in coords:
-				c = line.split(",")
-				x = int(c[0])
-				y = int(c[1])
-				z = int(c[2])
-				mc.setBlock(x,y,z,block.LEAVES)
-		except:
-			pass
-	elif option == "o:test WOOD":
-		try:
-			for line in coords:
-				c = line.split(",")
-				x = int(c[0])
-				y = int(c[1])
-				z = int(c[2])
-				mc.setBlock(x,y,z,block.WOOD)
-		except:
-			pass
-	elif option == "o:test TNT":
-		try:
-			for line in coords:
-				c = line.split(",")
-				x = int(c[0])
-				y = int(c[1])
-				z = int(c[2])
-				mc.setBlock(x,y,z,block.TNT)
-		except:
-			pass
-	elif option == "o:test":
-		try:
-			for line in coords:
-				c = line.split(",")
-				x = int(c[0])
-				y = int(c[1])
-				z = int(c[2])
-				mc.setBlock(x,y,z,random.choice((block.LEAVES, block.WOOD, block.TNT)))
-		except:
-			pass
-	else:
-		break
-show_message("Setup")
-print "This is going to be a competition, so first we need to know your name(s) and what team you're on"
-print
+    first_time = True
+    for letter in word:
+        rows = l[letter.upper()].split('\n')[1:-1]
+        for j in range(len(rows)):
+            word_string[j] += rows[j]
 
-while True:
-	names = raw_input("Please enter your names (e.g. Grace and Lucy):")
-	
-	if len(names) == 0:
-		print "Try again, you must enter your names"
-	else:
-		break
+    # add this word on to the end of the complete message
+    complete_string += word_string
+# display combined result
+for j in range(len(complete_string)):
+    complete_string[j] = complete_string[j].replace(".","")
+    print complete_string[j]
 
-while True:
-	team = raw_input("""
-	Which team are you in?
-	1: Leaves
-	2: Wood
-	3: TNT
-
-	Please choose your team by typing 1, 2 or 3 (then press enter)
-	""").strip()
-	teams = ['Leaves', 'Wood', 'TNT']
-	if team in "123":
-		try:
-			team = teams[int(team) - 1]
-			print "Thank you. You are in team:", team
-			break
-		except:
-			pass
-	print "Please try again - you must choose 1, 2 or 3"
-q = 0
-score = 0
-
-
-
-# setup minecraft
-mc.postToChat(names + " in team " + team + " just joined the quiz")
-
-if team == "Leaves":
-	b = block.LEAVES
-elif team == "Wood":
-	b = block.WOOD
-else:
-	b = block.TNT
-
-
-
-
-while True:
-	q += 1
-	show_message("Score: " + str(score))
-	print "Name(s):", names
-	print "Team:", team
-	print
-	print "In order to get points you need to enter minecraft coordinates correctly"
-	print "In order to enter minecraft coordinates, you need to answer this question correctly:"
-	
-	i = random.randint(0, NUM_QUESTIONS - 1)
-	print
-	print "Keyword:", keywords[i]
-	print
-	print "is it:"
-	
-	options = data[1::2]
-	options.remove(definitions[i])
-	while(len(options) > 3):
-		options.pop()
-		random.shuffle(options)
-	options.append(definitions[i])
-	random.shuffle(options)
-	
-	letters = "abcd"
-	for j in range(4):
-		print "  ", letters[j] + ":", options[j]
-	print
-	while True:
-		option = raw_input("Which is the correct definition: (a, b, c or d)?").strip().lower()
-		if option in letters:
-			break
-		else:
-			print "Please type a, b, c or d"
-		
-	chosen_index = letters.index(option)
-	print options[chosen_index], definitions[i]
-	correct = options[chosen_index] == definitions[i]
-	if correct:
-		show_message("Correct")
-		print "Well done!"
-		print "The right definition of", keywords[i], "is:"
-		print " ", definitions[i]
-	else:
-		show_message("Wrong")
-		print "The right definition of", keywords[i], "is:"
-		print " ", definitions[i]
-		
-	print 
-	raw_input("Press ENTER to type in a minecraft coordinate")
-	
-	if correct:
-		show_message("Score: " + str(score))
-		print "Name(s):", names
-		print "Team:", team
-		print
-		print "You can now enter a minecraft coordinate in binary."
-		print "If you enter both numbers correctly, you will get a point"
-		
-		print
-		x_bin = raw_input("Carefully enter the X coordinate:").replace(" ", "")
-		y_bin = raw_input("Carefully enter the Y coordinate:").replace(" ", "")
-		
-		
-		print
-		print "You entered:", x_bin, y_bin
-		try:
-			x = int(x_bin,2)
-			y = int(y_bin,2)
-			print "When you convert ", x_bin, "from binary you get x =", x
-			print "When you convert ", y_bin, "from binary you get y =", y
-			
-			test_for_coord = str(x) + "," + str(y) + ",0"
-			if test_for_coord in coords:
-				print "Well done - your block has now been sent to minecraft"
-				mc.setBlock(x,y,0,b)
-				mc.postToChat(names+" just built some "+team+ " at x=" + str(x) + ", y=" + str(y))
-				score +=1 
-			else:
-				raise
-		except:
-			print "I'm sorry, you typed in one of the coordinates wrong. Please try again"
-	
-		print
-		raw_input("Press ENTER for your next question")
+output = open("message.csv", "w")
+for y in range(len(complete_string)):
+    row = complete_string[y]
+    for x in range(len(row)):
+        bit = row[x]
+        if bit =="1":
+            output.write(str(x_offset + x) + "," + str(y_offset - y)+ "," + str(z_offset) + "\n")
+output.close()
+"""
+for letter in word:
+    print l[letter.upper()]"""
