@@ -1,3 +1,7 @@
+"""
+This file contains a dictionary containing all the capital letters as 2d bitmap images
+so that they can be converted into minecraft blocks
+"""
 letters = {
 'A':"""
 .    1    .
